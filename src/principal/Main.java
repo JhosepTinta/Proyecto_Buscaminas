@@ -2,6 +2,7 @@ package principal;
 
 import java.util.Scanner;
 
+import control.ControladorTablero;
 import vista.Posicion;
 import vista.TableroInterno;
 import vista.Ventana;

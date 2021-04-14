@@ -20,7 +20,7 @@ public class Posicion {
         }
         return bb;
     }
-    public String getPosicion() {
+    public String toString() {
 		return fila+","+columna;
 	}
 }

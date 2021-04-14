@@ -7,7 +7,9 @@ import javax.swing.JButton;
 
 public class Casilla extends JButton implements MouseListener{
 	private Posicion pos;
-	public Casilla(int x,int y) {
+	private int contador;
+	public Casilla(int x,int y,String simbolo) {
+		super(simbolo);
 		pos = new Posicion(x, y);
 		addMouseListener(this);
 	}	
@@ -18,6 +20,9 @@ public class Casilla extends JButton implements MouseListener{
 	    if (e.getButton()==MouseEvent.BUTTON1){
 	        //Se presiono el boton izquierdo
 	    	System.out.println(pos);
+	    	if(contador==0) {
+	    		
+	    	}
 	    }
 	    if(e.getButton()==MouseEvent.BUTTON3){
 	        //Se presiono el boton derecho
