@@ -12,8 +12,11 @@ public class Tablero extends JPanel {
 		
 	}
 	private void agregarElementos(int filas,int columnas) {
-		for (int i = 0; i < (filas*columnas); i++) {
-			add(new JButton(":)"));
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
+				add(new Casilla(i,j));
+			}
 		}
 	}
+	
 }
