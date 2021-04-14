@@ -6,6 +6,7 @@ public class TableroInterno {
 	
 	private int Diseño[][];//almacena los datos internos del juego
     private String Vista[][];//almacena los datos a mostrarse para el usuario
+    
     private ArrayList<Posicion>PosMinas;//almacena las posiciones de todas las minas
     private Posicion pos_ini;//almacena la posicion inicial que ingresa el usuario
     

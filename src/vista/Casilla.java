@@ -17,7 +17,7 @@ public class Casilla extends JButton implements MouseListener{
 		// TODO Auto-generated method stub
 	    if (e.getButton()==MouseEvent.BUTTON1){
 	        //Se presiono el boton izquierdo
-	    	System.out.println(pos.getPosicion());
+	    	System.out.println(pos);
 	    }
 	    if(e.getButton()==MouseEvent.BUTTON3){
 	        //Se presiono el boton derecho
