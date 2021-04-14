@@ -20,4 +20,7 @@ public class Posicion {
         }
         return bb;
     }
+    public String getPosicion() {
+		return fila+","+columna;
+	}
 }

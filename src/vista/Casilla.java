@@ -6,28 +6,18 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 
 public class Casilla extends JButton implements MouseListener{
-	private int x;
-	private int y;
+	private Posicion pos;
 	public Casilla(int x,int y) {
-		this.x=x;
-		this.y=y;
+		pos = new Posicion(x, y);
 		addMouseListener(this);
-	}
-	public int getPosicionX() {
-		return x;
-	}
-	public int getPosicionY() {
-		return y;
 	}	
-	public String getPosicion() {
-		return x+","+y;
-	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 	    if (e.getButton()==MouseEvent.BUTTON1){
 	        //Se presiono el boton izquierdo
-	    	System.out.println(getPosicion());
+	    	System.out.println(pos.getPosicion());
 	    }
 	    if(e.getButton()==MouseEvent.BUTTON3){
 	        //Se presiono el boton derecho
