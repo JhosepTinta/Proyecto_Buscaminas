@@ -15,10 +15,10 @@ public class ControladorTablero {
 	}
 	
 	public void agregarCasillas() {
-		for (int i = 0; i < tableroInterno[0].length; i++) {
+		/*for (int i = 0; i < tableroInterno[0].length; i++) {
 			for (int j = 0; j < tableroInterno.length; j++) {
-				visual.add(new Casilla(i,j,tableroInterno[i][j]));
+				visual.add(new Casilla(i,j));
 			}
-		}
+		}*/
 	}
 }

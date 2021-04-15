@@ -11,7 +11,7 @@ public class Ventana extends JFrame{
 	//private ControladorTablero control= new ControladorTablero(modelo,vista);
 	public Ventana() {
 		setBounds(400,300,500,350);
-		vista= new Tablero(8,8);
+		vista= new Tablero(8,8, 12);
 		setLayout(new BorderLayout());
 		Cabecera head = new Cabecera();
 		add(head,BorderLayout.NORTH);

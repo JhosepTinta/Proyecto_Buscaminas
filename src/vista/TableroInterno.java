@@ -13,12 +13,15 @@ public class TableroInterno {
     private boolean hayMina;
     private boolean ganoJuego;
     
-    public TableroInterno(int filas, int columnas){
+    private int cantidadMinas;
+    
+    public TableroInterno(int filas, int columnas, int cantidadMinas){
         Diseño=new int[filas][columnas];
         Vista=new String[filas][columnas];
         PosMinas=new ArrayList();
         hayMina = false;
         ganoJuego = false;
+        this.cantidadMinas = cantidadMinas;
     }
     
     public void iniciarPrimeraVez(Posicion p) {
@@ -42,15 +45,16 @@ public class TableroInterno {
     			imprimir(Diseño);
                 imprimir(Vista);
                 System.out.println("Fin del Juego, perdiste :')");
-        }else{
-            explosionBlancos(p.getF(),p.getC());
-            imprimir(Diseño);
-            imprimir(Vista);
-        
-    	}
-    	}else {
-    		System.out.println("Felicidades, has ganado");
-    	}
+	        }else{
+	            explosionBlancos(p.getF(),p.getC());
+	            imprimir(Diseño);
+	            imprimir(Vista);
+	        
+	    	}
+    		
+    		ganoElJuego();
+    		
+	    }
     
     	
    
@@ -116,7 +120,7 @@ public class TableroInterno {
     }
     //genPosMinas
     private void genPosMinas(){
-        for(int i=0;i<12;i++){
+        for(int i=0;i<cantidadMinas;i++){
             Posicion aux=generar();
             if(i>0){
                 boolean hay=buscar(aux,i);
@@ -129,8 +133,8 @@ public class TableroInterno {
         }
     }
     private Posicion generar(){
-        int f=(int)(Math.random()*9);
-        int c=(int)(Math.random()*9);
+        int f=(int)(Math.random()*Vista[0].length);
+        int c=(int)(Math.random()*Vista.length);
         return new Posicion(f,c);
     }
     private boolean buscar(Posicion n, int j){
@@ -203,7 +207,11 @@ public class TableroInterno {
             }
         }
         
-        ganoJuego = c == 12;
+        ganoJuego = c == cantidadMinas;
+        
+        if(ganoJuego) {
+        	System.out.println("Felicidades, has ganado");
+        }
         
         return ganoJuego;
     }
