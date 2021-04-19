@@ -2,6 +2,8 @@ package vista;
 
 import java.util.ArrayList;
 
+import modelo.Posicion;
+
 public class TableroInterno {
 	
 	private int Diseño[][];//almacena los datos internos del juego
@@ -337,5 +339,21 @@ public class TableroInterno {
 	}
     
     
+	public String[][]getVistaFinal(){
+		String res[][]= new String[Vista[0].length][Vista.length];
+		
+        for(int i=0;i<Vista[0].length;i++){
+            for(int j=0;j<Vista.length;j++){
+            	res[i][j]=Vista[i][j];
+            	if(Diseño[i][j]==9) {
+            		res[i][j]="F";
+            	}
+            }
+        }
+        
+        imprimir(res);
+		
+		return res;
+	}
     
 }

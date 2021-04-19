@@ -1,4 +1,4 @@
-package control;
+package modelo;
 
 public class Hilo extends Thread {
     private boolean pausado;
