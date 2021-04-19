@@ -8,9 +8,9 @@ import javax.swing.*;
 import vista.*;
 
 public class VistaPrincipal extends JFrame {
-	private PanelPrincipal inicio = new PanelPrincipal();
+	public static PanelPrincipal inicio = new PanelPrincipal();
 	private PanelJuego juego;
-	private JScrollPane scrollPaneles;
+	private static JScrollPane scrollPaneles;
 
 	public VistaPrincipal() {
 		scrollPaneles = new JScrollPane();
@@ -73,7 +73,7 @@ public class VistaPrincipal extends JFrame {
 		});
 	}
 
-	private void definirPaneles(JPanel panel) {
+	public static void definirPaneles(JPanel panel) {
 		scrollPaneles.setViewportView(panel);
 	}
 }
