@@ -85,12 +85,19 @@ public class PanelJuego extends JPanel{
 		
 	}
 	
-	public static boolean gastarBandera() {
-		cantBanderasNum--;
+	public static boolean gastarBandera(boolean accion) {
+		
 		boolean bb = false;
-		if(cantBanderasNum>=0) {
-			bb = true;
+		if(accion) {
+			cantBanderasNum = cantBanderasNum-1;
+			if(cantBanderasNum>=0) {
+				bb = true;
+				cantBanderas.setText(""+cantBanderasNum);
+			}
+		}else {
+			cantBanderasNum = cantBanderasNum+1;
 			cantBanderas.setText(""+cantBanderasNum);
+			bb = true;
 		}
 		return bb;
 	}

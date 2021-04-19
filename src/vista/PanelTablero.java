@@ -11,6 +11,7 @@ import javax.swing.*;
 
 //import control.Controlador;
 import modelo.Posicion;
+import principal.VistaPrincipal;
 import vista.*;
 
 public class PanelTablero extends JPanel {
@@ -66,6 +67,10 @@ public class PanelTablero extends JPanel {
 		super.removeAll();
 
 		boolean bb = false;
+		
+		if(tableroInterno.isGanoJuego()) {
+			VistaPrincipal.definirPaneles(new PanelGanador("3838", "32424"));
+		}
 
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {
@@ -112,10 +117,9 @@ public class PanelTablero extends JPanel {
 
 				if (elemento.equals("F")) {
 					bb = true;
+					VistaPrincipal.definirPaneles(new PanelPerdedor("333", "32424", PanelTablero.this));
 				}
-
 				// add(new Casilla(i,j, elemento));
-
 			}
 		}
 
@@ -144,9 +148,7 @@ public class PanelTablero extends JPanel {
 
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {
-
 				String elemento = tablafin[i][j];
-
 				if (elemento.equals("*")) {
 					elemento = "";
 				}
@@ -169,7 +171,6 @@ public class PanelTablero extends JPanel {
 						aux.setBackground(new Color(20, 199, 102));
 					}
 				}
-
 				if (esNumerico(elemento)) {
 					int n = Integer.parseInt(elemento);
 					if (n % 2 == 0) {
@@ -178,20 +179,15 @@ public class PanelTablero extends JPanel {
 						aux.setBackground(new Color(158, 106, 56));
 					}
 				}
-
 				if (elemento.equals("F")) {
 					aux.setText("");
 					aux.setBackground(new Color(128, 64, 0));
 					aux.setIcon(new ImageIcon(getClass().getResource("/imagenes/bomba.png")));
 				}
-
 				add(tablero[i][j]);
-
 				// add(new Casilla(i,j, tablafin[i][j]));
-
 			}
 		}
-
 	}
 
 	class Casilla extends JButton implements MouseListener {
@@ -228,6 +224,9 @@ public class PanelTablero extends JPanel {
 							actualizarElementos();
 
 						} else {
+							
+							
+							
 							System.out.println("Gano el juego :)");
 						}
 					} else {
@@ -248,7 +247,7 @@ public class PanelTablero extends JPanel {
 							
 							banderas[pos.getF()][pos.getC()] = !banderas[pos.getF()][pos.getC()];
 							if (banderas[pos.getF()][pos.getC()]) {
-								if(PanelJuego.gastarBandera()) {
+								if(PanelJuego.gastarBandera(true)) {
 									super.setIcon(new ImageIcon(getClass().getResource("/imagenes/bandera.png")));
 								}else {
 									banderas[pos.getF()][pos.getC()] = false;
@@ -256,6 +255,7 @@ public class PanelTablero extends JPanel {
 								
 							} else {
 								super.setIcon(null);
+								PanelJuego.gastarBandera(false);
 							}
 						}
 					} else {
