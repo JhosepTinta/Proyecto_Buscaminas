@@ -7,12 +7,9 @@ import java.awt.Image;
 
 import javax.swing.*;
 
-
 //import control.Controlador;
 
 public class PanelJuego extends JPanel{
-
-	private int csdf = 0;
 	
 	private Image portada = new ImageIcon(getClass().getResource("/imagenes/vistaJuego.jpg")).getImage();
 	private PanelTablero panelTablero;
