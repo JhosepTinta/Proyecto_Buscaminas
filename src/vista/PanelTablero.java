@@ -17,7 +17,7 @@ public class PanelTablero extends JPanel {
 	private JButton[][] tablero;
 	private int filas;
 	private int columnas;
-	//private Controlador c;
+	// private Controlador c;
 	private int contador;
 
 	private boolean[][] banderas;
@@ -26,7 +26,7 @@ public class PanelTablero extends JPanel {
 
 	public PanelTablero(int filas, int columnas, int cantMinas) {
 		tablero = new JButton[filas][columnas];
-		//this.c = c;
+		// this.c = c;
 		this.filas = filas;
 		this.columnas = columnas;
 
@@ -95,8 +95,11 @@ public class PanelTablero extends JPanel {
 						aux.setBackground(new Color(20, 199, 102));
 					}
 				}
-				
-				if (esNumerico(elemento)) {
+
+				if (banderas[i][j]) {
+					aux.setText("");
+					aux.setIcon(new ImageIcon(getClass().getResource("/imagenes/bandera.png")));
+				} else if (esNumerico(elemento)) {
 					int n = Integer.parseInt(elemento);
 					if (n % 2 == 0) {
 						aux.setBackground(new Color(206, 154, 104));
@@ -104,7 +107,6 @@ public class PanelTablero extends JPanel {
 						aux.setBackground(new Color(158, 106, 56));
 					}
 				}
-
 
 				add(tablero[i][j]);
 
@@ -134,6 +136,8 @@ public class PanelTablero extends JPanel {
 	private void llenarBombas() {
 		super.removeAll();
 
+		PanelJuego.iniciarTiempo(false);
+		
 		String[][] tablafin = tableroInterno.getVistaFinal();
 
 		boolean bb = false;
@@ -177,7 +181,7 @@ public class PanelTablero extends JPanel {
 
 				if (elemento.equals("F")) {
 					aux.setText("");
-					aux.setBackground(new Color(158, 106, 56));
+					aux.setBackground(new Color(128, 64, 0));
 					aux.setIcon(new ImageIcon(getClass().getResource("/imagenes/bomba.png")));
 				}
 
@@ -211,6 +215,7 @@ public class PanelTablero extends JPanel {
 					if (!tableroInterno.isHayMina()) {
 						if (!tableroInterno.isGanoJuego()) {
 							if (contador == 0) {
+								PanelJuego.iniciarTiempo(true);
 								tableroInterno.iniciarPrimeraVez(pos);
 								contador++;
 								super.setText(tableroInterno.getVista()[pos.getF()][pos.getC()]);
@@ -235,14 +240,39 @@ public class PanelTablero extends JPanel {
 				// Se presiono el boton derecho
 				// System.out.println("derecho");
 
-				if (super.getText().length() == 0) {
+				if (!tableroInterno.isHayMina()) {
+					if (!tableroInterno.isGanoJuego()) {
+						if (super.getText().length() == 0) {
+							
+							
+							
+							banderas[pos.getF()][pos.getC()] = !banderas[pos.getF()][pos.getC()];
+							if (banderas[pos.getF()][pos.getC()]) {
+								if(PanelJuego.gastarBandera()) {
+									super.setIcon(new ImageIcon(getClass().getResource("/imagenes/bandera.png")));
+								}else {
+									banderas[pos.getF()][pos.getC()] = false;
+								}
+								
+							} else {
+								super.setIcon(null);
+							}
+						}
+					} else {
+						System.out.println("Gano el juego :)");
+					}
+				} else {
+					System.out.println("Perdio el juego :(");
+				}
+
+				/*if (super.getText().length() == 0) {
 					banderas[pos.getF()][pos.getC()] = !banderas[pos.getF()][pos.getC()];
 					if (banderas[pos.getF()][pos.getC()]) {
 						super.setIcon(new ImageIcon(getClass().getResource("/imagenes/bandera.png")));
 					} else {
 						super.setIcon(null);
 					}
-				}
+				}*/
 			}
 		}
 

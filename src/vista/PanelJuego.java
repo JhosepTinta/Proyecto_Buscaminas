@@ -16,17 +16,23 @@ public class PanelJuego extends JPanel{
 	private JButton rendirse;
 	private JButton volverInicio;
 	private JLabel tiempo;
-	private JLabel cantBanderas;
+	private static JLabel cantBanderas;
 	//private Controlador controlJuego;
+	
+	public static Hilo miHilo;
+	public static int cantBanderasNum;
+	
 	public PanelJuego() {
 		//controlJuego = new Controlador(this);
 		rendirse = new JButton(new ImageIcon(getClass().getResource("/imagenes/rendirse.png")));
 		volverInicio = new JButton(new ImageIcon(getClass().getResource("/imagenes/volver.png")));
-		tiempo = new JLabel("00:00");
+		tiempo = new JLabel("00");
 		cantBanderas = new JLabel("10");
+		cantBanderasNum = 10;
 		panelTablero  = new PanelTablero(8,8,12);
 		setLayout(null);
 		agregarComponentes();
+		miHilo = new Hilo();
 	}
 	
 	public void paint(Graphics g) {
@@ -69,7 +75,107 @@ public class PanelJuego extends JPanel{
 		panelTablero.setBounds(x, y, w, h);
 	}
 	
-	public void iniciarTiempo(String t) {
-		tiempo.setText(t);
+	public static void iniciarTiempo(boolean bb) {
+		//tiempo.setText(t);
+		if(bb) {
+			miHilo.start();
+		}else {
+			miHilo.setPausado(true);
+		}
+		
 	}
+	
+	public static boolean gastarBandera() {
+		cantBanderasNum--;
+		boolean bb = false;
+		if(cantBanderasNum>=0) {
+			bb = true;
+			cantBanderas.setText(""+cantBanderasNum);
+		}
+		return bb;
+	}
+
+	
+	class Hilo extends Thread {
+	    private boolean pausado;
+	    //private Button conexion;
+	    private String tiempoVar;
+
+	    //private Hand handler;
+
+	    public Hilo(){
+	        //conexion = button;
+	        pausado = false;
+	        //handler = new Hand(button);
+	    }
+
+	    public void run(){
+	        int minutos = 0, segundos = 0;
+	        while(!pausado){
+	            try {
+	                ponerTiempoBoton(minutos, segundos);
+	                
+	                segundos++;
+	                
+	                if(segundos==60){
+	                    segundos = 0;
+	                    minutos++;
+	                    /*if(minutos == 1){
+	                        pausado = true;
+	                    }*/
+	                }
+
+	                this.sleep(1000);
+	            } catch (Exception ex) {
+	                //Toast.makeText(JugarOnline.this, "Algo salió mal", Toast.LENGTH_SHORT).show();
+	            }
+	        }
+	    }
+
+	    private void ponerTiempoBoton(int minutos, int segundos){
+
+	        if(segundos<60&&minutos==0) {
+	        	if(segundos<10){
+	            	tiempoVar = "0"+segundos;
+	            }else{
+	            	tiempoVar = ""+segundos;
+	            }
+	        }else if(minutos<60){//cantidad limite minutos
+	            if(segundos<10){
+	            	tiempoVar = minutos+":0"+segundos;
+	            }else{
+	            	tiempoVar = minutos+":0"+segundos;
+	            }
+
+	        }else{
+	            tiempoVar = "Fin del Juego";
+	            //handler.setHcron(tiempoVar);
+	            //handler.act();
+	            //conexion.callOnClick();
+	            pausado= true;
+	            //Toast.makeText(this, "tiempo pausado por true", Toast.LENGTH_SHORT).show();
+	        }
+	        
+	        //System.out.println(tiempoVar);
+	        //tiempo.setText(tiempoVar);
+
+	        tiempo.setText(tiempoVar);
+	        
+	        //handler.setHcron(tiempoVar);
+	        //handler.act();
+
+	    }
+
+	    public void setPausado(boolean bb){
+	        pausado = bb;
+	    }
+
+	    public String getTiempoVar(){
+	        return tiempoVar;
+	    }
+	    
+	    
+	    
+	}
+	
 }

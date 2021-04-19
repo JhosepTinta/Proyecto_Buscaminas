@@ -87,6 +87,8 @@ public class PanelPrincipal extends JPanel{
 	public JButton darAvanzado() {
 		return botonAvanzado;
 	}
+	
+	
 }
 
 
