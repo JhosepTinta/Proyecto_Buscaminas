@@ -4,9 +4,7 @@ public class Hilo extends Thread {
     private boolean pausado;
     //private Button conexion;
     private String tiempoVar;
-
     //private Hand handler;
-
     public Hilo(){
         //conexion = button;
         pausado = false;
